@@ -1,0 +1,17 @@
+{
+  "name": "datafilter",
+  "version": "0.0.0",
+  "description": "Simple filtering for collections of objects",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "data",
+    "json",
+    "filter",
+    "validation"
+  ],
+  "author": "Kevin Chapelier <kevin.chapelier@gmail.com> (http://www.kchapelier.com/)",
+  "license": "MIT"
+}
