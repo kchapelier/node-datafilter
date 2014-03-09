@@ -89,6 +89,7 @@ describe('DataFilter', function(){
 			
 			filter.evaluateFieldValue(dataset[0], null).should.equal(dataset[0]);
 			filter.evaluateFieldValue(dataset[0], '').should.equal(dataset[0]);
+			filter.evaluateFieldValue(dataset[0]).should.equal(dataset[0]);
 		});
 	});
 	
