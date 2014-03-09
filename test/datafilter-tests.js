@@ -86,6 +86,7 @@ describe('DataFilter', function(){
 
             should.not.exist(filter.evaluateFieldValue(dataset[0], 'data.missing'));
             should.not.exist(filter.evaluateFieldValue(dataset[0], 'missing'));
+            should.not.exist(filter.evaluateFieldValue(dataset[0], 'data.really.missing'));
         });
 
         it('should return the element itself when no field is specified', function() {
