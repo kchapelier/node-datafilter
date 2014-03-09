@@ -1,10 +1,10 @@
 {
   "name": "datafilter",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Simple filtering for collections of objects",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/.bin/mocha test/"
   },
   "keywords": [
     "data",
@@ -12,6 +12,10 @@
     "filter",
     "validation"
   ],
-  "author": "Kevin Chapelier <kevin.chapelier@gmail.com> (http://www.kchapelier.com/)",
+  "devDependencies": {
+    "mocha" : "1.17.x",
+    "chai" : "1.9.x"
+  },
+  "author": "Kevin Chapelier <kevin.chapelier@gmail.com>",
   "license": "MIT"
 }

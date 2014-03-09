@@ -1,3 +1,3 @@
-var DataFilter = require('lib/datafilter.js');
+var DataFilter = require('./lib/datafilter.js');
 
 module.exports = DataFilter;
