@@ -194,4 +194,40 @@ describe('DataFilter', function(){
             filter.evaluateExpression(['news', 'letter'], 'not array contains', ['spam', 'mail', 'letter']).should.be.false;
         });
     });
+
+    describe('#test()', function() {
+        it('should just work and return boolean', function() {
+            var filter = new DataFilter();
+            filter.add('data.tags', 'array contains', 'first');
+
+            filter.test(dataset[0]).should.be.true;
+            filter.test(dataset[1]).should.be.false;
+        });
+    });
+
+    describe('#match()', function() {
+        it('should return the matching elements without modifying the input', function() {
+            var filter = new DataFilter();
+            filter.add('data.tags', 'array contains', 'article');
+            filter.add('data.author.age', 'less than', 40);
+
+            var filtered = filter.match(dataset);
+
+            filtered.length.should.equal(2);
+            dataset.length.should.equal(4);
+
+            [1, 3].should.include(filtered[0].id);
+            [1, 3].should.include(filtered[1].id);
+        });
+
+        it('should always return an array, even if empty', function() {
+            var filter = new DataFilter();
+            filter.add('data.tags', 'array contains', 'story');
+
+            var filtered = filter.match(dataset);
+
+            filtered.should.be.an('array');
+            filtered.length.should.equal(0);
+        });
+    });
 });
