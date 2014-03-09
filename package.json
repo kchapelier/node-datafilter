@@ -16,6 +16,6 @@
     "mocha" : "1.17.x",
     "chai" : "1.9.x"
   },
-  "author": "Kevin Chapelier <kevin.chapelier@gmail.com>",
+  "author": "Kevin Chapelier",
   "license": "MIT"
 }
