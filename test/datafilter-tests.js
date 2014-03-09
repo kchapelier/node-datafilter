@@ -1,3 +1,5 @@
+"use strict";
+
 var should = require('chai').should();
 
 var DataFilter = require('../index.js');
@@ -55,7 +57,7 @@ describe('DataFilter', function(){
 				},
 				tags : ['newsletter', 'dying media']
 			}
-		},
+		}
 	];
 
 	describe('#evaluateFieldValue', function() {
