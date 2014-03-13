@@ -2,7 +2,11 @@
   "name": "datafilter",
   "version": "0.1.0",
   "description": "Simple filtering for collections of objects",
+  "homepage": "https://github.com/kchapelier/node-datafilter",
   "main": "index.js",
+  "engines": {
+    "node": ">= 0.10.0"
+  },
   "scripts": {
     "test": "./node_modules/.bin/mocha test/"
   },
@@ -16,6 +20,21 @@
     "mocha" : "1.17.x",
     "chai" : "1.9.x"
   },
-  "author": "Kevin Chapelier",
-  "license": "MIT"
+  "author": {
+    "name" : "Kevin Chapelier"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/kchapelier/node-datafilter.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kchapelier/node-datafilter/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/kchapelier/node-datafilter/blob/master/LICENSE"
+    }
+  ],
+  "readmeFilename": "README.md"
 }
