@@ -60,8 +60,6 @@ describe('DataFilter', function(){
         }
     ];
 
-    
-
     describe('#evaluateFieldValue', function() {
         it('should return the exact value or reference', function() {
             var filter = new DataFilter();
@@ -229,6 +227,40 @@ describe('DataFilter', function(){
 
             filtered.should.be.an('array');
             filtered.length.should.equal(0);
+        });
+
+        it('should always return an array, even if the dataset is not array', function() {
+            var filter = new DataFilter();
+            filter.add('data.tags', 'array contains', 'story');
+
+            var filtered = filter.match('error');
+
+            filtered.should.be.an('array');
+            filtered.length.should.equal(0);
+        });
+
+        it('should work with as a blacklist too', function() {
+            var filter = new DataFilter();
+            filter.add('data.tags', 'array contains', 'article');
+
+            var filtered = filter.match(dataset, DataFilter.BLACKLIST);
+
+            filtered.should.be.an('array');
+            filtered.length.should.equal(1);
+            filtered[0].id.should.equal(4);
+        });
+    });
+
+    describe('#clear', function() {
+        it('should remove all conditions', function() {
+            var filter = new DataFilter();
+            filter.add('data.tags', 'array contains', 'article');
+            filter.add('data.author.age', 'less than', 40);
+            filter.clear();
+
+            var filtered = filter.match(dataset);
+            filtered.should.be.an('array');
+            filtered.length.should.equal(4);
         });
     });
 });
