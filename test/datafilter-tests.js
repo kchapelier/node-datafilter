@@ -250,6 +250,45 @@ describe('DataFilter', function(){
             filtered[0].id.should.equal(4);
         });
     });
+    
+    describe('#first()', function() {
+        it('should return only one element when several are matching the filter', function() {
+            var filter = new DataFilter();
+            filter.add('data.tags', 'array contains', 'article');
+
+            var filtered = filter.first(dataset);
+
+            filtered.should.be.an('object');
+        });
+
+        it('should return null when no element are matching the filter', function() {
+            var filter = new DataFilter();
+            filter.add('data.tags', 'array contains', 'story');
+
+            var filtered = filter.first(dataset);
+
+            should.equal(filtered, null);
+        });
+
+        it('should not break with incorrect input', function() {
+            var filter = new DataFilter();
+            filter.add('data.tags', 'array contains', 'story');
+
+            var filtered = filter.first('error');
+
+            should.equal(filtered, null);
+        });
+
+        it('should work with as a blacklist too', function() {
+            var filter = new DataFilter();
+            filter.add('data.tags', 'array contains', 'article');
+
+            var filtered = filter.first(dataset, DataFilter.BLACKLIST);
+
+            filtered.should.be.an('object');
+            filtered.id.should.equal(4);
+        });
+    });
 
     describe('#clear', function() {
         it('should remove all conditions', function() {
