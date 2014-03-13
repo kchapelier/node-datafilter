@@ -60,7 +60,7 @@ describe('DataFilter', function(){
         }
     ];
 
-    describe('#evaluateFieldValue', function() {
+    describe('#evaluateFieldValue()', function() {
         it('should return the exact value or reference', function() {
             var filter = new DataFilter();
 
@@ -290,7 +290,7 @@ describe('DataFilter', function(){
         });
     });
 
-    describe('#clear', function() {
+    describe('#clear()', function() {
         it('should remove all conditions', function() {
             var filter = new DataFilter();
             filter.add('data.tags', 'array contains', 'article');
@@ -299,6 +299,50 @@ describe('DataFilter', function(){
 
             var filtered = filter.match(dataset);
             filtered.should.be.an('array');
+            filtered.length.should.equal(4);
+        });
+    });
+
+    describe('#remove()', function() {
+        it('should remove the matching filter', function() {
+            var filter = new DataFilter();
+            filter.add('data.tags', 'array contains', 'article');
+            filter.add('data.author.age', 'less than', 30);
+            filter.remove('data.author.age', 'less than', 30);
+
+            var filtered = filter.match(dataset);
+
+            filtered.length.should.equal(3);
+        });
+
+        it('should remove the matching filter even if only a part of the filter is specified', function() {
+            var filter = new DataFilter();
+            filter.add('data.tags', 'array contains', 'article');
+            filter.add('data.author.age', 'less than', 30);
+            filter.remove('data.author.age');
+            filter.remove(null, null, 'article');
+
+            var filtered = filter.match(dataset);
+
+            filtered.length.should.equal(4);
+        });
+
+        it('should not fail if there are no matching filter', function() {
+            var filter = new DataFilter();
+            filter.add('data.tags', 'array contains', 'article');
+            filter.remove('data.author.age');
+
+            var filtered = filter.match(dataset);
+
+            filtered.length.should.equal(3);
+        });
+
+        it('should not fail if there are not filter', function() {
+            var filter = new DataFilter();
+            filter.remove('data.author.age');
+
+            var filtered = filter.match(dataset);
+
             filtered.length.should.equal(4);
         });
     });
