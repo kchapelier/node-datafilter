@@ -1,6 +1,6 @@
 {
   "name": "datafilter",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Simple filtering for collections of objects",
   "homepage": "https://github.com/kchapelier/node-datafilter",
   "main": "index.js",
