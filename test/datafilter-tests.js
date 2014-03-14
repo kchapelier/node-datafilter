@@ -346,4 +346,18 @@ describe('DataFilter', function(){
             filtered.length.should.equal(4);
         });
     });
+
+    describe('#filter()', function() {
+        it('should return matched elements', function() {
+            var filtered = DataFilter.filter(dataset, [
+                ['data.author.age', 'greater than', 20],
+                ['data.tags', 'array contains', 'article']
+            ]);
+
+            filtered.should.be.an('array');
+            filtered.length.should.equal(2);
+            [1, 2].should.include(filtered[0].id);
+            [1, 2].should.include(filtered[1].id);
+        });
+    });
 });
