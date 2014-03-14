@@ -29,7 +29,7 @@ npm install datafilter
 
 * Any operator can be negated by prepending a single exclamation point or the keyword _not_ (ie: _not lower than_, _!==_, _!regexp_).
 * Gotcha : _!==_ is a negation of _==_, not a negation of _===_.
-* All operators accepts multiple filter values as an array. A condition is considered as valid as long as it is true for any of its value.
+* All operators accepts multiple filter values as an array. A condition is considered as valid as long as it is true for any of its values.
 
 ### dataFilter.add(field, operator, value);
 
@@ -114,7 +114,7 @@ filter.add('likes.count', '>', 0).add('tags', 'array contains', ['videogame', 'g
 var filtered = filter.match(instagramData);
 ```
 
-Get only the post on instagram having at least one like and tagged as _videogame_ or _game_.
+Filter the posts retrieved from instagram to get one those having at least one like and tagged as _videogame_ or _game_.
 
 ```js
 var instagramData = ...; //get data from instagram somehow
@@ -139,7 +139,7 @@ var selfies = filter.match(instagramData);
 var relevantData = filter.match(instagramData, DataFilter.BLACKLIST);
 ```
 
-Separate the data retrieved from Instagram in two arrays, one with the photos tagged as _selfie_ and one with those who are more likely to be of interest (who are not tagged as _selfie_).
+Separate the data retrieved from Instagram in two arrays, one with the photos tagged as _selfie_ and one with those who are more likely to be of interest (not tagged as _selfie_).
 
 ## Potential use case
 
