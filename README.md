@@ -90,18 +90,6 @@ Options :
 
 * object : Object to test.
 
-### new glitch.GlitchedStream(options);
-
-Transform stream implementation.
-
-Options :
-
-* probability : Probability of deviation per byte (between 0 and 1).
-* deviation : Maximum value deviation per byte.
-* whiteList : Array of whitelisted values, if set only bytes with those values will be modified.
-* blackList : Array of blacklisted values, no byte with those values will be modified.
-* deviationFunction : Replace the default deviation function of the stream, allows to write more complex filtering than whitelisting and blacklisting.
-
 ## Examples
 
 ```js
@@ -114,7 +102,7 @@ filter.add('likes.count', '>', 0).add('tags', 'array contains', ['videogame', 'g
 var filtered = filter.match(instagramData);
 ```
 
-Filter the posts retrieved from instagram to get one those having at least one like and tagged as _videogame_ or _game_.
+Filter the posts retrieved from instagram to get only those having at least one like and tagged as _videogame_ or _game_.
 
 ```js
 var instagramData = ...; //get data from instagram somehow
@@ -144,8 +132,8 @@ Separate the data retrieved from Instagram in two arrays, one with the photos ta
 ## Potential use case
 
 * You want to apply a filter on the data you got from an API.
-* You want to store a set of filtering conditions in some kind of database. The conditions format makes it really easy to do it.
-* DataFilter is not supposed to be used as some kind of _SQL over JSON_.
+* You want to store a set of filtering conditions in some kind of database. The conditions' format makes it really easy.
+* DataFilter is not designed to be used as some kind of _SQL over JSON_.
 
 ## License
 
