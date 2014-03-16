@@ -147,6 +147,10 @@ Separate the data retrieved from Instagram in two arrays, one with the photos ta
 * You want to store a set of filtering conditions in some kind of database. The conditions' format makes it really easy.
 * DataFilter is not designed to be used as some kind of _SQL over JSON_.
 
+## Roadmap
+
+* Next release : 1.0.0 (fix any issue with the public API, decide whether there is a need for exception/error anywhere, document all of it and declare it stable, no new functionality).
+
 ## License
 
 MIT

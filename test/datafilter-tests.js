@@ -204,7 +204,7 @@ describe('DataFilter', function(){
             filter.evaluateExpression(100, customOperator, 110).should.be.false;
         });
     });
-/*
+
     describe('#addOperator()', function() {
         it('must return a boolean', function() {
             DataFilter.addOperator('customOperator', function(fieldValue, filterValue) {}).should.be.true;
@@ -216,9 +216,25 @@ describe('DataFilter', function(){
 
         it('must not allow creating an operator matching the negation pattern', function() {
             DataFilter.addOperator('not someOtherOperator', function(fieldValue, filterValue) {}).should.be.false;
+            DataFilter.addOperator('!someOtherOperator', function(fieldValue, filterValue) {}).should.be.false;
         });
     });
-*/
+
+    describe('#addOperatorAlias()', function() {
+        it('must return a boolean', function() {
+            DataFilter.addOperatorAlias('strict equal', 'really equal').should.be.true;
+        });
+
+        it('must not allow modifying an existing operator', function() {
+            DataFilter.addOperatorAlias('strict equal', 'equal').should.be.false;
+        });
+
+        it('must not allow creating an operator matching the negation pattern', function() {
+            DataFilter.addOperator('strict equal', 'not different').should.be.false;
+            DataFilter.addOperator('strict equal', '!different').should.be.false;
+        });
+    });
+
     describe('#test()', function() {
         it('should just work and return boolean', function() {
             var filter = new DataFilter();
