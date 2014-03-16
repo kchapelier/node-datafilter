@@ -3,12 +3,18 @@ datafilter
 
 Simple filtering for collections of objects
 
-## Install
+## Installing and testing
 
 With [npm](http://npmjs.org) do:
 
 ```
 npm install datafilter
+```
+
+To run the test suite, run the following command from the datafilter directory:
+
+```
+npm run-script test
 ```
 
 ## API reference
@@ -68,7 +74,7 @@ var filteredBooks = dataFilter.match(books, DataFilter.BLACKLIST);
 
 ### dataFilter.first(dataset, [polarity = DataFilter.WHITELIST]);
 
-Apply the conditions of the filter on a collection of objects and returns the first matching element, if any. Returns null otherwise.
+Apply the conditions of the filter on a collection of objects and return the first matching element, if any. Return null otherwise.
 
 Options :
 
@@ -129,7 +135,7 @@ var relevantData = filter.match(instagramData, DataFilter.BLACKLIST);
 
 Separate the data retrieved from Instagram in two arrays, one with the photos tagged as _selfie_ and one with those who are more likely to be of interest (not tagged as _selfie_).
 
-## Potential use case
+## Potential use cases
 
 * You want to apply a filter on the data you got from an API.
 * You want to store a set of filtering conditions in some kind of database. The conditions' format makes it really easy.
