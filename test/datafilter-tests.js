@@ -192,8 +192,33 @@ describe('DataFilter', function(){
             filter.evaluateExpression('newsletter', 'not equal', ['spam', 'mail', 'newsletter']).should.be.false;
             filter.evaluateExpression(['news', 'letter'], 'not array contains', ['spam', 'mail', 'letter']).should.be.false;
         });
-    });
 
+        it('should accept function as operator', function() {
+            var filter = new DataFilter();
+
+            var customOperator = function(fieldValue, filterValue) {
+                return fieldValue > filterValue;
+            };
+
+            filter.evaluateExpression(100, customOperator, 10).should.be.true;
+            filter.evaluateExpression(100, customOperator, 110).should.be.false;
+        });
+    });
+/*
+    describe('#addOperator()', function() {
+        it('must return a boolean', function() {
+            DataFilter.addOperator('customOperator', function(fieldValue, filterValue) {}).should.be.true;
+        });
+
+        it('must not allow modifying an existing operator', function() {
+            DataFilter.addOperator('equal', function(fieldValue, filterValue) {}).should.be.false;
+        });
+
+        it('must not allow creating an operator matching the negation pattern', function() {
+            DataFilter.addOperator('not someOtherOperator', function(fieldValue, filterValue) {}).should.be.false;
+        });
+    });
+*/
     describe('#test()', function() {
         it('should just work and return boolean', function() {
             var filter = new DataFilter();

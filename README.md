@@ -1,5 +1,5 @@
-datafilter
-===============
+DataFilter
+==========
 
 Simple filtering for collections of objects
 
@@ -45,8 +45,8 @@ This function is chainable.
 Options :
 
 * field : Field name or path to test (ie: _title_ for the property title at the root of all object, _author.name_ for the property name of the property author, ...)
-* operator : Any of the operator listed above.
-* value : Value to test / compare the field with.
+* operator : Any of the operator listed above or a custom function comparing the field value (its first argument) and the filter value (its second argument)
+* value : Value or array of values to test / compare the field with.
 
 Example :
 
@@ -54,6 +54,12 @@ Example :
 dataFilter.add('author.name', 'not equal', 'Proust');
 dataFilter.add('theme', 'equal', ['philosophy', 'science']);
 dataFilter.add('pageNumber', '>', 150);
+
+var isLonger = function(fieldValue, filterValue) {
+    return fieldValue.length > filterValue.length;
+};
+dataFilter.add('author.name', isLonger, 'Proust');
+
 ```
 
 ### dataFilter.match(dataset, [polarity = DataFilter.WHITELIST]);
