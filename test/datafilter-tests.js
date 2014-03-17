@@ -365,7 +365,7 @@ describe('DataFilter', function(){
 
             var filtered = filter.match(dataset);
 
-            filtered.length.should.equal(4);
+            filtered.length.should.equal(3);
         });
 
         it('should not fail if there are no matching filter', function() {

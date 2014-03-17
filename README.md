@@ -19,17 +19,17 @@ npm run-script test
 
 ## API reference
 
-### Operator list
+### Default operators
 
 * greater than (or >) : Check that the field is greater than the value
 * greater than equal (or >=) : Check that the field is greater than or equal to the value
 * less than (or <) : Check that the field is lower than the value
-* less than equal (or <=) : Check that the field is greater than or equal to the value
+* less than equal (or <=) : Check that the field is lower than or equal to the value
 * equal : Check that the field is equal to the value
 * strict equal (or ===) : Check that the field is strictly equal to the value
 * contains : Check that the field is a string and contains the value
 * array contains : Check that the field is an array and contains the value
-* regexp : Test a field against a RegExp object
+* regexp : Test the field against a RegExp object
 
 ### Operator negation and multiple values
 
@@ -62,7 +62,23 @@ dataFilter.add('author.name', isLonger, 'Proust');
 
 ```
 
-### dataFilter.match(dataset, [polarity = DataFilter.WHITELIST]);
+### dataFilter.clear();
+
+Remove all the conditions previously added to the filter.
+This function is chainable.
+
+### dataFilter.remove(field [, operator [, value]]);
+
+Remove all the conditions previously added to the filter matching the criteria.
+This function is chainable.
+
+Options :
+
+* field : Field name or path of the conditions to remove.
+* operator : Operator of the conditions to remove.
+* value : Value or array of values of the conditions to remove.
+
+### dataFilter.match(dataset [, polarity = DataFilter.WHITELIST]);
 
 Apply the conditions of the filter on a collection of objects and returns all the matching elements as an array.
 
@@ -78,7 +94,7 @@ var filteredBooks = dataFilter.match(books);
 var filteredBooks = dataFilter.match(books, DataFilter.BLACKLIST);
 ```
 
-### dataFilter.first(dataset, [polarity = DataFilter.WHITELIST]);
+### dataFilter.first(dataset [, polarity = DataFilter.WHITELIST]);
 
 Apply the conditions of the filter on a collection of objects and return the first matching element, if any. Return null otherwise.
 
@@ -101,6 +117,24 @@ Apply the conditions of the filter on a single object and returns whether the el
 Options :
 
 * object : Object to test.
+
+### DataFilter.addOperator(operator, evaluationFunction);
+
+Add an operator to the global operator list. Returns true in case of success, false otherwise.
+
+Options :
+
+* operator : Name of the operator (must not match the negation pattern or already be in use)
+* evaluationFunction : Evaluation function comparing the field value (its first argument) and the filter value (its second argument)
+
+### DataFilter.addOperatorAlias(operator, alias);
+
+Create an alias for an existing operator. Returns true in case of success, false otherwise.
+
+Options :
+
+* operator : Name of the existing operator
+* alias : Name of the alias (must not match the negation pattern or already be in use)
 
 ## Examples
 
@@ -140,6 +174,35 @@ var relevantData = filter.match(instagramData, DataFilter.BLACKLIST);
 ```
 
 Separate the data retrieved from Instagram in two arrays, one with the photos tagged as _selfie_ and one with those who are more likely to be of interest (not tagged as _selfie_).
+
+## Examples using custom operators
+
+There are two ways of using custom operators.
+
+```js
+DataFilter.addOperator(
+    'is longer than',
+    function(fieldValue, filterValue) {
+        return (fieldValue.length > filterValue.length);
+    }
+);
+
+var filter = new DataFilter();
+filter.add('name', 'is longer than', 'Proust');
+```
+
+Declares an operator globally, useful if you want to handle operators as strings only, store them in a database, etc.
+
+```js
+var isLonger = function(fieldValue, filterValue) {
+    return (fieldValue.length > filterValue.length);
+};
+
+var filter = new DataFilter();
+filter.add('name', isLonger, 'Proust');
+```
+
+Use a custom function as an operator, useful for single-use operators.
 
 ## Potential use cases
 
