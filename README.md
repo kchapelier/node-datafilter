@@ -28,14 +28,14 @@ npm run-script test
 * equal (or ==) : Check that the field is equal to the value
 * strict equal (or ===) : Check that the field is strictly equal to the value
 * contains : Check that the field is a string and contains the value
-* array contains : Check that the field is an array and contains the value
-* regexp : Test the field against a RegExp object
+* has : Check that the field is an array and contains the value
+* matches : Test the field against a RegExp object
 * starts with : Check that the field starts with the value
 * ends with : Check that the field ends with the value
 
 ### Operator negation and multiple values
 
-* Any operator can be negated by prepending a single exclamation point or the keyword _not_ (ie: _not lower than_, _!==_, _!regexp_).
+* Any operator can be negated by prepending a single exclamation point or the keyword _not_ (ie: _not lower than_, _!==_, _!matches_).
 * Gotcha : _!==_ is a negation of _==_, not a negation of _===_.
 * All operators accepts multiple filter values as an array. A condition is considered as valid as long as it is true for any of its values.
 
@@ -145,7 +145,7 @@ var instagramData = ...; //get data from instagram somehow
 
 var filter = new DataFilter();
 
-filter.add('likes.count', '>', 0).add('tags', 'array contains', ['videogame', 'game']);
+filter.add('likes.count', '>', 0).add('tags', 'has', ['videogame', 'game']);
 
 var filtered = filter.match(instagramData);
 ```
@@ -159,7 +159,7 @@ var filtered = DataFilter.filter(
     instagramData,
     [
         ['likes.count', '>', 0],
-        ['tags', 'array contains', ['videogame', 'game']]
+        ['tags', 'has', ['videogame', 'game']]
     ]
 );
 ```
@@ -169,7 +169,7 @@ Do exactly the same thing with an alternative syntax.
 ```js
 var instagramData = ...; //get data from instagram somehow
 
-var filter = new DataFilter().add('tags', 'array contains', ['selfie']);
+var filter = new DataFilter().add('tags', 'has', ['selfie']);
 
 var selfies = filter.match(instagramData);
 var relevantData = filter.match(instagramData, DataFilter.BLACKLIST);

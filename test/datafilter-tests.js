@@ -134,19 +134,19 @@ describe('DataFilter', function(){
             filter.evaluateExpression('loveletter', 'contains', 'news').should.be.false;
         });
 
-        it('should support array contains', function(){
+        it('should support has', function(){
             var filter = new DataFilter();
 
-            filter.evaluateExpression(['news', 'letter'], 'array contains', 'news').should.be.true;
-            filter.evaluateExpression(['newsletter'], 'array contains', 'news').should.be.false;
+            filter.evaluateExpression(['news', 'letter'], 'has', 'news').should.be.true;
+            filter.evaluateExpression(['newsletter'], 'has', 'news').should.be.false;
         });
 
-        it('should support regexp', function(){
+        it('should support matches', function(){
             var filter = new DataFilter();
 
-            filter.evaluateExpression('newsletter', 'regexp', /News/i).should.be.true;
-            filter.evaluateExpression('newsletter', 'regexp', 'news').should.be.true;
-            filter.evaluateExpression('newsletter', 'regexp', 'News').should.be.false;
+            filter.evaluateExpression('newsletter', 'matches', /News/i).should.be.true;
+            filter.evaluateExpression('newsletter', 'matches', 'news').should.be.true;
+            filter.evaluateExpression('newsletter', 'matches', 'News').should.be.false;
         });
 
         it('should support starts with', function(){
@@ -232,7 +232,7 @@ describe('DataFilter', function(){
             filter.evaluateExpression(100, 'not less than', 101).should.be.false;
             filter.evaluateExpression(100, 'not greater than', 101).should.be.true;
             filter.evaluateExpression('newsletter', 'not equal', ['spam', 'mail', 'newsletter']).should.be.false;
-            filter.evaluateExpression(['news', 'letter'], 'not array contains', ['spam', 'mail', 'letter']).should.be.false;
+            filter.evaluateExpression(['news', 'letter'], 'not has', ['spam', 'mail', 'letter']).should.be.false;
         });
 
         it('should accept function as operator', function() {
@@ -280,7 +280,7 @@ describe('DataFilter', function(){
     describe('#test()', function() {
         it('should just work and return boolean', function() {
             var filter = new DataFilter();
-            filter.add('data.tags', 'array contains', 'first');
+            filter.add('data.tags', 'has', 'first');
 
             filter.test(dataset[0]).should.be.true;
             filter.test(dataset[1]).should.be.false;
@@ -290,7 +290,7 @@ describe('DataFilter', function(){
     describe('#match()', function() {
         it('should return the matching elements without modifying the input', function() {
             var filter = new DataFilter();
-            filter.add('data.tags', 'array contains', 'article');
+            filter.add('data.tags', 'has', 'article');
             filter.add('data.author.age', 'less than', 40);
 
             var filtered = filter.match(dataset);
@@ -304,7 +304,7 @@ describe('DataFilter', function(){
 
         it('should always return an array, even if empty', function() {
             var filter = new DataFilter();
-            filter.add('data.tags', 'array contains', 'story');
+            filter.add('data.tags', 'has', 'story');
 
             var filtered = filter.match(dataset);
 
@@ -314,7 +314,7 @@ describe('DataFilter', function(){
 
         it('should always return an array, even if the dataset is not array', function() {
             var filter = new DataFilter();
-            filter.add('data.tags', 'array contains', 'story');
+            filter.add('data.tags', 'has', 'story');
 
             var filtered = filter.match('error');
 
@@ -324,7 +324,7 @@ describe('DataFilter', function(){
 
         it('should work with as a blacklist too', function() {
             var filter = new DataFilter();
-            filter.add('data.tags', 'array contains', 'article');
+            filter.add('data.tags', 'has', 'article');
 
             var filtered = filter.match(dataset, DataFilter.BLACKLIST);
 
@@ -337,7 +337,7 @@ describe('DataFilter', function(){
     describe('#first()', function() {
         it('should return only one element when several are matching the filter', function() {
             var filter = new DataFilter();
-            filter.add('data.tags', 'array contains', 'article');
+            filter.add('data.tags', 'has', 'article');
 
             var filtered = filter.first(dataset);
 
@@ -346,7 +346,7 @@ describe('DataFilter', function(){
 
         it('should return null when no element are matching the filter', function() {
             var filter = new DataFilter();
-            filter.add('data.tags', 'array contains', 'story');
+            filter.add('data.tags', 'has', 'story');
 
             var filtered = filter.first(dataset);
 
@@ -355,7 +355,7 @@ describe('DataFilter', function(){
 
         it('should not break with incorrect input', function() {
             var filter = new DataFilter();
-            filter.add('data.tags', 'array contains', 'story');
+            filter.add('data.tags', 'has', 'story');
 
             var filtered = filter.first('error');
 
@@ -364,7 +364,7 @@ describe('DataFilter', function(){
 
         it('should work with as a blacklist too', function() {
             var filter = new DataFilter();
-            filter.add('data.tags', 'array contains', 'article');
+            filter.add('data.tags', 'has', 'article');
 
             var filtered = filter.first(dataset, DataFilter.BLACKLIST);
 
@@ -376,7 +376,7 @@ describe('DataFilter', function(){
     describe('#clear()', function() {
         it('should remove all conditions', function() {
             var filter = new DataFilter();
-            filter.add('data.tags', 'array contains', 'article');
+            filter.add('data.tags', 'has', 'article');
             filter.add('data.author.age', 'less than', 40);
             filter.clear();
 
@@ -389,7 +389,7 @@ describe('DataFilter', function(){
     describe('#remove()', function() {
         it('should remove the matching filter', function() {
             var filter = new DataFilter();
-            filter.add('data.tags', 'array contains', 'article');
+            filter.add('data.tags', 'has', 'article');
             filter.add('data.author.age', 'less than', 30);
             filter.remove('data.author.age', 'less than', 30);
 
@@ -400,7 +400,7 @@ describe('DataFilter', function(){
 
         it('should remove the matching filter even if only a part of the filter is specified', function() {
             var filter = new DataFilter();
-            filter.add('data.tags', 'array contains', 'article');
+            filter.add('data.tags', 'has', 'article');
             filter.add('data.author.age', 'less than', 30);
             filter.remove('data.author.age');
             filter.remove(null, null, 'article');
@@ -412,7 +412,7 @@ describe('DataFilter', function(){
 
         it('should not fail if there are no matching filter', function() {
             var filter = new DataFilter();
-            filter.add('data.tags', 'array contains', 'article');
+            filter.add('data.tags', 'has', 'article');
             filter.remove('data.author.age');
 
             var filtered = filter.match(dataset);
@@ -434,7 +434,7 @@ describe('DataFilter', function(){
         it('should return matched elements', function() {
             var filtered = DataFilter.filter(dataset, [
                 ['data.author.age', 'greater than', 20],
-                ['data.tags', 'array contains', 'article']
+                ['data.tags', 'has', 'article']
             ]);
 
             filtered.should.be.an('array');
