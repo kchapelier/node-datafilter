@@ -20,11 +20,13 @@ var filter = new DataFilter();
 filter.add('users.author.age', 'equal', 20);
 filter.add('content', 'strict equal', 'some text');
 
+/*/
 console.log(filter.test(data));
 console.log(filter.evaluateExpression('test', 'equal', ['test', 'testme']));
-console.log(filter.evaluateExpression('test', 'equal', ['testyou', 'testme']));
+console.log(!filter.evaluateExpression('test', 'equal', ['testyou', 'testme']));
+/**/
 
-suite/*.add('#evaluateFieldValue() at one level', function() {
+suite.add('#evaluateFieldValue() at one level', function() {
     filter.evaluateFieldValue(data, 'users.author.age');
 }).add('#evaluateFieldValue() at three levels', function() {
     filter.evaluateFieldValue(data, 'content');
@@ -40,8 +42,7 @@ suite/*.add('#evaluateFieldValue() at one level', function() {
 }).add('#evaluateExpression() with two filter values (good first)', function() {
     filter.evaluateExpression('test', 'equal', ['test', 'testme']);
     filter.evaluateExpression('test', 'strict equal', ['test', 'testme']);
-})*/
-.add('#test()', function() {
+}).add('#test()', function() {
     filter.test(data);
 }).on('cycle', function(event) {
     console.log(event.target.name, '|', (event.target.stats.mean * 1000) + 'ms', '|', event.target.stats.variance);
