@@ -30,6 +30,8 @@ npm run-script test
 * contains : Check that the field is a string and contains the value
 * array contains : Check that the field is an array and contains the value
 * regexp : Test the field against a RegExp object
+* starts with : Check that the field starts with the value
+* ends with : Check that the field ends with the value
 
 ### Operator negation and multiple values
 

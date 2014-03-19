@@ -149,6 +149,24 @@ describe('DataFilter', function(){
             filter.evaluateExpression('newsletter', 'regexp', 'News').should.be.false;
         });
 
+        it('should support starts with', function(){
+            var filter = new DataFilter();
+
+            filter.evaluateExpression('newsletter', 'starts with', 'news').should.be.true;
+            filter.evaluateExpression('newsletter', 'starts with', 'News').should.be.false;
+            filter.evaluateExpression('newsletter', 'starts with', 'letter').should.be.false;
+            filter.evaluateExpression('newsletter', 'starts with', 'incorrect').should.be.false;
+        });
+
+        it('should support ends with', function(){
+            var filter = new DataFilter();
+
+            filter.evaluateExpression('newsletter', 'ends with', 'news').should.be.false;
+            filter.evaluateExpression('newsletter', 'ends with', 'Letter').should.be.false;
+            filter.evaluateExpression('newsletter', 'ends with', 'letter').should.be.true;
+            filter.evaluateExpression('newsletter', 'ends with', 'incorrect').should.be.false;
+        });
+
         it('should support less than', function(){
             var filter = new DataFilter();
 
@@ -161,6 +179,18 @@ describe('DataFilter', function(){
             });
         });
 
+        it('should support less than or equal', function(){
+            var filter = new DataFilter();
+
+            var operators = ['<=', 'less than or equal'];
+
+            operators.forEach(function(operator) {
+                filter.evaluateExpression(100, operator, 101).should.be.true;
+                filter.evaluateExpression(100, operator, 100).should.be.true;
+                filter.evaluateExpression(100, operator, 0).should.be.false;
+            });
+        });
+
         it('should support greater than', function(){
             var filter = new DataFilter();
 
@@ -169,6 +199,18 @@ describe('DataFilter', function(){
             operators.forEach(function(operator) {
                 filter.evaluateExpression(100, operator, 101).should.be.false;
                 filter.evaluateExpression(100, operator, 100).should.be.false;
+                filter.evaluateExpression(100, operator, 0).should.be.true;
+            });
+        });
+
+        it('should support greater than or equal', function(){
+            var filter = new DataFilter();
+
+            var operators = ['>=', 'greater than or equal'];
+
+            operators.forEach(function(operator) {
+                filter.evaluateExpression(100, operator, 101).should.be.false;
+                filter.evaluateExpression(100, operator, 100).should.be.true;
                 filter.evaluateExpression(100, operator, 0).should.be.true;
             });
         });
