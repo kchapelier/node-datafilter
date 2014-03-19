@@ -22,10 +22,10 @@ npm run-script test
 ### Default operators
 
 * greater than (or >) : Check that the field is greater than the value
-* greater than equal (or >=) : Check that the field is greater than or equal to the value
+* greater than or equal (or >=) : Check that the field is greater than or equal to the value
 * less than (or <) : Check that the field is lower than the value
-* less than equal (or <=) : Check that the field is lower than or equal to the value
-* equal : Check that the field is equal to the value
+* less than or equal (or <=) : Check that the field is lower than or equal to the value
+* equal (or ==) : Check that the field is equal to the value
 * strict equal (or ===) : Check that the field is strictly equal to the value
 * contains : Check that the field is a string and contains the value
 * array contains : Check that the field is an array and contains the value
