@@ -36,13 +36,13 @@ npm run-script test
 ### Operator negation and multiple values
 
 * Any operator can be negated by prepending a single exclamation point or the keyword _not_ (ie: _not lower than_, _!==_, _!matches_).
-* Gotcha : _!==_ is a negation of _==_, not a negation of _===_.
-* All operators accepts multiple filter values as an array. A condition is considered as valid as long as it is true for any of its values.
+* Thus _!==_ is a negation of _==_ (not a negation of _===_).
+* All operators accept multiple filter values as an array. A condition is considered as valid as long as it is true for any of its values.
 
 ### dataFilter.add(field, operator, value);
 
 Add a condition to the filter.
-This function is chainable.
+This method is chainable.
 
 Options :
 
@@ -67,12 +67,12 @@ dataFilter.add('author.name', isLonger, 'Proust');
 ### dataFilter.clear();
 
 Remove all the conditions previously added to the filter.
-This function is chainable.
+This method is chainable.
 
 ### dataFilter.remove(field [, operator [, value]]);
 
 Remove all the conditions previously added to the filter matching the criteria.
-This function is chainable.
+This method is chainable.
 
 Options :
 
@@ -196,6 +196,15 @@ filter.add('name', 'is longer than', 'Proust');
 Declares an operator globally, useful if you want to handle operators as strings only, store them in a database, etc.
 
 ```js
+DataFilter.Operators.alias('is longer than', 'L>');
+
+var filter = new DataFilter();
+filter.add('name', 'L>', 'Proust');
+```
+
+Declares an alias for our new operator
+
+```js
 var isLonger = function(fieldValue, filterValue) {
     return (fieldValue.length > filterValue.length);
 };
@@ -218,8 +227,8 @@ Use a custom function as an operator, useful for single-use operators.
 
 - The operator `regexp` was renamed as `matches`.
 - The operator `array contains` was renamed as `has`.
-- The operators `starts with` and `ends with` were implemented.
 - The operators `greater than equal` and `lower than equal` were renamed as `greater than or equal` and `lower than or equal`.
+- The operators `starts with` and `ends with` were implemented.
 - The methods `evaluateFieldValue()`, `evaluateExpression()` and `evaludatePartialExpression()` are declared as protected.
 - The static methods `addOperator()` and `addOperatorAlias()` were moved to `Operators.add()` and `Operators.alias()`.
 
