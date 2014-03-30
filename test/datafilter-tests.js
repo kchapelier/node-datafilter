@@ -247,33 +247,33 @@ describe('DataFilter', function(){
         });
     });
 
-    describe('#addOperator()', function() {
+    describe('#Operators.add()', function() {
         it('must return a boolean', function() {
-            DataFilter.addOperator('customOperator', function(fieldValue, filterValue) {}).should.be.true;
+            DataFilter.Operators.add('customOperator', function(fieldValue, filterValue) {}).should.be.true;
         });
 
         it('must not allow modifying an existing operator', function() {
-            DataFilter.addOperator('equal', function(fieldValue, filterValue) {}).should.be.false;
+            DataFilter.Operators.add('equal', function(fieldValue, filterValue) {}).should.be.false;
         });
 
         it('must not allow creating an operator matching the negation pattern', function() {
-            DataFilter.addOperator('not someOtherOperator', function(fieldValue, filterValue) {}).should.be.false;
-            DataFilter.addOperator('!someOtherOperator', function(fieldValue, filterValue) {}).should.be.false;
+            DataFilter.Operators.add('not someOtherOperator', function(fieldValue, filterValue) {}).should.be.false;
+            DataFilter.Operators.add('!someOtherOperator', function(fieldValue, filterValue) {}).should.be.false;
         });
     });
 
-    describe('#addOperatorAlias()', function() {
+    describe('#Operators.alias()', function() {
         it('must return a boolean', function() {
-            DataFilter.addOperatorAlias('strict equal', 'really equal').should.be.true;
+            DataFilter.Operators.alias('strict equal', 'really equal').should.be.true;
         });
 
         it('must not allow modifying an existing operator', function() {
-            DataFilter.addOperatorAlias('strict equal', 'equal').should.be.false;
+            DataFilter.Operators.alias('strict equal', 'equal').should.be.false;
         });
 
         it('must not allow creating an operator matching the negation pattern', function() {
-            DataFilter.addOperator('strict equal', 'not different').should.be.false;
-            DataFilter.addOperator('strict equal', '!different').should.be.false;
+            DataFilter.Operators.add('strict equal', 'not different').should.be.false;
+            DataFilter.Operators.add('strict equal', '!different').should.be.false;
         });
     });
 

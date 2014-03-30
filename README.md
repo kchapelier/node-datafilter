@@ -182,7 +182,7 @@ Separate the data retrieved from Instagram in two arrays, one with the photos ta
 There are two ways of using custom operators.
 
 ```js
-DataFilter.addOperator(
+DataFilter.Operators.add(
     'is longer than',
     function(fieldValue, filterValue) {
         return (fieldValue.length > filterValue.length);
@@ -212,9 +212,16 @@ Use a custom function as an operator, useful for single-use operators.
 * You want to store a set of filtering conditions in some kind of database. The conditions' format makes it really easy.
 * DataFilter is not designed to be used as some kind of _SQL over JSON_.
 
-## Roadmap
+## Changelog
 
-* Next release : 1.0.0 (fix any issue with the public API, decide whether there is a need for exception/error anywhere, document all of it and declare it stable, no new functionality).
+### 1.0.0 (2014-03-30) :
+
+- The operator `regexp` was renamed as `matches`.
+- The operator `array contains` was renamed as `has`.
+- The operators `starts with` and `ends with` were implemented.
+- The operators `greater than equal` and `lower than equal` were renamed as `greater than or equal` and `lower than or equal`.
+- The methods `evaluateFieldValue()`, `evaluateExpression()` and `evaludatePartialExpression()` are declared as protected.
+- The static methods `addOperator()` and `addOperatorAlias()` were moved to `Operators.add()` and `Operators.alias()`.
 
 ## License
 
