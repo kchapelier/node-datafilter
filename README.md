@@ -1,6 +1,8 @@
 DataFilter
 ==========
 
+[![Build Status](https://travis-ci.org/kchapelier/node-datafilter.svg)](https://travis-ci.org/kchapelier/node-datafilter)
+
 Simple filtering for collections of objects
 
 ## Installing and testing
@@ -229,7 +231,7 @@ Use a custom function as an operator, useful for single-use operators.
 - The operator `array contains` was renamed as `has`.
 - The operators `greater than equal` and `lower than equal` were renamed as `greater than or equal` and `lower than or equal`.
 - The operators `starts with` and `ends with` were implemented.
-- The methods `evaluateFieldValue()`, `evaluateExpression()` and `evaludatePartialExpression()` are declared as protected.
+- The methods `evaluateFieldValue()`, `evaluateExpression()` and `evaludatePartialExpression()` were declared as protected.
 - The static methods `addOperator()` and `addOperatorAlias()` were moved to `Operators.add()` and `Operators.alias()`.
 
 ## License
