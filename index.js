@@ -1,5 +1,5 @@
-var DataFilter = require('./lib/datafilter.js'),
-    operators = require('./lib/operators.js');
+var DataFilter = require('./lib/datafilter'),
+    operators = require('./lib/operators');
 
 operators(DataFilter); //inject default operators
 

@@ -225,6 +225,10 @@ Use a custom function as an operator, useful for single-use operators.
 
 ## Changelog
 
+### 1.0.1 (2014-04-21) :
+
+- Now usable with Titanium.
+
 ### 1.0.0 (2014-03-30) :
 
 - The operator `regexp` was renamed as `matches`.
