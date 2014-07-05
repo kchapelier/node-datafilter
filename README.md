@@ -16,7 +16,7 @@ npm install datafilter
 To run the test suite, run the following command from the datafilter directory:
 
 ```
-npm run-script test
+npm test
 ```
 
 ## API reference
@@ -224,6 +224,10 @@ Use a custom function as an operator, useful for single-use operators.
 * DataFilter is not designed to be used as some kind of _SQL over JSON_.
 
 ## Changelog
+
+### 1.0.2 (2014-07-05) :
+
+- Update dev dependencies.
 
 ### 1.0.1 (2014-04-21) :
 
