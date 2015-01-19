@@ -225,6 +225,12 @@ Use a custom function as an operator, useful for single-use operators.
 
 ## Changelog
 
+### 1.0.3 (2015-01-19) :
+
+- Update dev dependencies.
+- Define jscs and jshint config.
+- Added automatic tests on Node.js 0.11.x via Travis.
+
 ### 1.0.2 (2014-07-05) :
 
 - Update dev dependencies.
